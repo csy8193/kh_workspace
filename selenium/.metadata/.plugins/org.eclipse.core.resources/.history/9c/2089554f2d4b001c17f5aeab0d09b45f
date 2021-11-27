@@ -1,0 +1,15 @@
+package edu.kh.javatest.ex;
+
+public class Example1 {
+	
+	// 메인 메소드 : Java 프로젝트 실행 메소드
+	public static void main(String[] args) {
+		// public : 같은 프로젝트 내부 어디서든 접근 가능
+		
+		// 자바 메모리 영역
+		// Stack : 호출된 메소드가 순서대로 쌓이는 영역
+		// Heap :
+		// Static : 
+		
+	}
+}

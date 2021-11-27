@@ -1,0 +1,44 @@
+package edu.kh.servlet;
+
+import java.io.IOException;
+import java.util.Arrays;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class TestServlet1 extends HttpServlet{
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		// HttpServletRequest req : 요청 관련 데이터, 정보를 가지고 있는 객체
+		
+		// Parameter : 클라이언트(고객) 요청 시 전달 받은 값
+		
+		String inputName = req.getParameter("inputName");
+		// -> 요청 시 전달 받은 값 중 name 속성값이 "inputName"인 input 태그의 value를 얻어옴
+		
+		String gender = req.getParameter("gender");
+		
+		
+		// 요청 시 전달 받은 값 중 중복되는 name 속성이 있는 경우
+		// == 이름이 같은 파라미터들을 하나의 배열로 저장
+		String[] hobby = req.getParameterValues("hobby");
+		String[] hashtag = req.getParameterValues("hashtag");
+		
+		System.out.println(inputName);
+		System.out.println(gender);
+		System.out.println(Arrays.toString(hobby));
+		System.out.println(Arrays.toString(hashtag));
+		
+		
+		// *** 응답(Response) ***
+		// - 클라이언트의 요청에 따라 처리된 내용을
+		// 서버 -> 클라이언트로 전달
+		 
+		
+	}
+	
+}

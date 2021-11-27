@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;edu.kh.poly.ex2.겨ㅜ&apos; to &apos;edu.kh.poly.ex2.run&apos;&#x0D;&#x0A;- Original project: &apos;09_Polymorphism&apos;&#x0D;&#x0A;- Original element: &apos;09_Polymorphism/src/edu.kh.poly.ex2.겨ㅜ&apos;&#x0D;&#x0A;- Renamed element: &apos;09_Polymorphism/src/edu.kh.poly.ex2.run&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;edu.kh.poly.ex2.겨ㅜ&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;edu.kh.poly.ex2.겨ㅜ" name="edu.kh.poly.ex2.run" qualified="false" references="true" stamp="1631174968274" textual="false" version="1.0"/>
+</session>

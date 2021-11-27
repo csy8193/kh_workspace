@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servlet 프로젝트 테스트</title>
+</head>
+<body>
+    <h1> index.html은 메인 페이지 역할을 합니다 </h1>
+
+    <hr>
+
+    <!-- 
+        form 태그 : 내부에 작성된 input 태그의 값을 서버로 전달하는 역할
+        action 속성 : 값을 전달할 서버 주소
+        method 속성 : 데이터 전달 방식
+        - get : 주소 뒤에 input 태그 값을 붙여서 전달 (데이터 직접 보임)
+        - post : HTTP Body에 값을 담아서 전달 (데이터 직접 안보임)
+     -->
+
+    <form action="/SevletProject/example1.do" method="get">
+        이름 : <input type="text" name="inputName"> <br>
+        나이 : <input type="number" name="inputAge">
+        <button>제출</button>
+
+    </form>
+
+    
+    
+</body>
+</html>

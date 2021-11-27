@@ -1,0 +1,8 @@
+package edu.kh.uitest.ex;
+
+public class Example05 {
+	public static void main(String[] args) {
+		// 구글 홈페이지 -> "KH정보교육원" 검색
+		// -> 제일 위 검색 결과를 선택 -> KH정보교육원 홈페이지 접속
+	}
+}

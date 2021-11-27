@@ -1,0 +1,22 @@
+content_assist_disabled_computers=org.eclipse.jdt.ui.textProposalCategory\u0000org.eclipse.jdt.ui.javaPostfixProposalCategory\u0000org.eclipse.jdt.ui.javaAllProposalCategory\u0000org.eclipse.jdt.ui.javaTypeProposalCategory\u0000org.eclipse.jdt.ui.javaNoTypeProposalCategory\u0000org.eclipse.jdt.ui.javaChainProposalCategory\u0000
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="java.util.Collection"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.lang.Iterable"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.util.List"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="edu.kh.scott.model.vo.Emp"><rhs name\="edu.kh.scott.model.vo.Emp"/></lhs><lhs name\="edu.kh.board.model.service.BoardService"><rhs name\="edu.kh.board.model.service.BoardService"/></lhs><lhs name\="edu.kh.board.view.BoardView"><rhs name\="edu.kh.board.view.BoardView"/></lhs><lhs name\="edu.kh.board.model.vo.Board"><rhs name\="edu.kh.board.model.vo.Board"/></lhs><lhs name\="java.util.Hashtable"><rhs name\="java.util.Properties"/></lhs><lhs name\="java.util.Map"><rhs name\="java.util.Properties"/></lhs><lhs name\="java.lang.Cloneable"><rhs name\="java.util.Properties"/></lhs><lhs name\="java.util.Dictionary"><rhs name\="java.util.Properties"/></lhs><lhs name\="java.util.Properties"><rhs name\="java.util.Properties"/></lhs><lhs name\="java.io.Closeable"><rhs name\="java.io.FileInputStream"/><rhs name\="java.util.Scanner"/></lhs><lhs name\="java.lang.AutoCloseable"><rhs name\="java.io.FileInputStream"/><rhs name\="java.util.Scanner"/></lhs><lhs name\="java.io.InputStream"><rhs name\="java.io.FileInputStream"/></lhs><lhs name\="edu.kh.jdbc.member.model.service.MemberService"><rhs name\="edu.kh.jdbc.member.model.service.MemberService"/></lhs><lhs name\="edu.kh.jdbc.member.model.dao.MemberDAO"><rhs name\="edu.kh.jdbc.member.model.dao.MemberDAO"/></lhs><lhs name\="edu.kh.jdbc.member.model.vo.Member"><rhs name\="edu.kh.jdbc.member.model.vo.Member"/></lhs><lhs name\="edu.kh.jdbc.view.BoardView"><rhs name\="edu.kh.jdbc.view.BoardView"/></lhs><lhs name\="edu.kh.jdbc.board.model.service.BoardService"><rhs name\="edu.kh.jdbc.board.model.service.BoardService"/></lhs><lhs name\="edu.kh.jdbc.board.model.dao.BoardDAO"><rhs name\="edu.kh.jdbc.board.model.dao.BoardDAO"/></lhs><lhs name\="edu.kh.jdbc.board.model.vo.Board"><rhs name\="edu.kh.jdbc.board.model.vo.Board"/></lhs><lhs name\="edu.kh.game.view.LoginView"><rhs name\="edu.kh.game.view.LoginView"/></lhs><lhs name\="edu.kh.game.model.service.GameService"><rhs name\="edu.kh.game.model.service.GameService"/></lhs><lhs name\="edu.kh.game.model.dao.GameDAO"><rhs name\="edu.kh.game.model.dao.GameDAO"/></lhs><lhs name\="edu.kh.project.view.LoginViewMethod"><rhs name\="edu.kh.project.view.LoginViewMethod"/></lhs><lhs name\="edu.kh.project.view.GameView"><rhs name\="edu.kh.project.view.GameView"/></lhs><lhs name\="edu.kh.project.view.RSPGame"><rhs name\="edu.kh.project.view.RSPGame"/></lhs><lhs name\="java.util.Iterator"><rhs name\="java.util.Scanner"/></lhs><lhs name\="edu.kh.project.game.model.service.GameService"><rhs name\="edu.kh.project.game.model.service.GameService"/></lhs><lhs name\="edu.kh.project.game.model.dao.GameDAO"><rhs name\="edu.kh.project.game.model.dao.GameDAO"/></lhs><lhs name\="edu.kh.project.view.UserMethod"><rhs name\="edu.kh.project.view.UserMethod"/></lhs><lhs name\="edu.kh.project.view.UpDown"><rhs name\="edu.kh.project.view.UpDown"/></lhs><lhs name\="java.lang.Throwable"><rhs name\="java.lang.NullPointerException"/></lhs><lhs name\="java.lang.Exception"><rhs name\="java.lang.NullPointerException"/></lhs><lhs name\="edu.kh.project.user.model.service.UserService"><rhs name\="edu.kh.project.user.model.service.UserService"/></lhs></history>
+content_assist_number_of_computers=20
+content_assist_proposals_background=255,255,255
+content_assist_proposals_foreground=0,0,0
+eclipse.preferences.version=1
+org.eclipse.jdt.internal.ui.navigator.layout=1
+org.eclipse.jdt.internal.ui.navigator.librariesnode=true
+org.eclipse.jdt.ui.formatterprofiles.version=21
+spelling_ignore_ampersand_in_properties=true
+spelling_ignore_digits=true
+spelling_ignore_java_strings=true
+spelling_ignore_mixed=true
+spelling_ignore_non_letters=true
+spelling_ignore_sentence=true
+spelling_ignore_single_letters=true
+spelling_ignore_upper=true
+spelling_ignore_urls=true
+spelling_locale_initialized=true
+spelling_user_dictionary_encoding=
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

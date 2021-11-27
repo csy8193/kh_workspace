@@ -1,0 +1,19 @@
+package edu.kh.collection.model.service;
+
+public class MapService {
+	
+	// Map : Key와 Value 한 쌍이 데이터가 되어 이를 모아둔 객체
+	
+	// - Key는 중복을 허용하지 않고, 순서가 없어서 (== Set 특징)
+	//	 Map 내부에 뒤죽박죽으로 저장됨
+	
+	// - Value는 Key에 의해서 서로 구분되기 때문에 중복이 가능하다
+	//	 (== List 특징)
+	
+	
+	public void example1() {
+		
+		// HashMap<K, V>
+		// HashMap<String, Integer>
+	}
+}

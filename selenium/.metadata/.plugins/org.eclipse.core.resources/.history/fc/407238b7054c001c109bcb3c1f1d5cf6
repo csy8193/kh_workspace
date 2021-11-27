@@ -1,0 +1,44 @@
+package edu.kh.uitest.ex;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class Example11 {
+	public static void main(String[] args) {
+		
+		System.setProperty("webdriver.chrome.driver", "C:/tools/selenium/chromedriver.exe");
+		
+		WebDriver driver = new ChromeDriver();
+		
+		driver.get("http://kh-aclass.xyz:8081/Selenium/exam3/loginInput.html");
+		
+		// 아이디, 비밀번호에 값을 전달하고
+		// 취소 버튼 누르기
+		
+		WebElement id = driver.findElement(By.id("id"));
+		WebElement pw = driver.findElement(By.id("password"));
+		
+		id.sendKeys("test");
+		pw.sendKeys("test");
+		
+		// 취소 버튼을 찾아서 클릭 -> 화면에 처음에 없기 때문에 오류 발생
+		// -> 대기명령 작성하면 해결 가능
+		
+		// 1. 묵시적 대기(implicitlyWait)
+		// driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(3));
+		
+		// 2. 명시적 대기(Explicitly Wait)
+		// -> 명시적으로 대기를 지정할 객체 생성
+		// 	  + 어떤 상황에 명시적 대기를 할 것인가 지정
+		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		
+		WebElement resetBtn = driver.findElement(By.id("resetBtn"));
+		resetBtn.click();
+	}
+}

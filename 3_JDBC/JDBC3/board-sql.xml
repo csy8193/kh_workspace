@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<!-- 게시글 삽입 SQL -->
+	<entry key="insertBoard">
+		INSERT INTO TB_BOARD
+		VALUES(SEQ_BOARD_NO.NEXTVAL, ?, ?, DEFAULT, DEFAULT, ?)
+	</entry>
+	
+	
+	<!-- 본인 확인 SQL -->
+	<entry key="checkBoard">
+		SELECT COUNT(*) FROM TB_BOARD
+		WHERE BOARD_NO = ?
+		AND BOARD_WRITER = ?
+	</entry>
+	
+	<!-- 게시글 수정 SQL -->
+	<entry key="updateBoard">
+		UPDATE TB_BOARD 
+		SET BOARD_TITLE = ?,
+		BOARD_CONTENT = ?
+		WHERE BOARD_NO = ?
+	</entry>
+	
+	<!-- 게시글 삭제 SQL -->
+	<entry key="deleteBoard">
+		DELETE FROM TB_BOARD
+		WHERE BOARD_NO = ?
+	</entry>
+	
+	
+	<entry key="selectBoard">
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, CREATE_DT, READ_COUNT, NVL(MEMBER_NM, '탈퇴회원') MEMBER_NM
+		FROM TB_BOARD
+		LEFT JOIN TB_MEMBER ON (BOARD_WRITER = MEMBER_NO)
+		WHERE BOARD_NO = ?
+	</entry>
+	
+	
+	<entry key="increaseReadCount">
+		UPDATE TB_BOARD SET READ_COUNT = READ_COUNT + 1
+		WHERE BOARD_NO = ?
+	</entry>
+	
+	
+	<entry key="selectBoardList">
+		SELECT BOARD_NO, BOARD_TITLE, CREATE_DT, READ_COUNT, NVL(MEMBER_NM, '탈퇴회원') MEMBER_NM
+		FROM TB_BOARD
+		LEFT JOIN TB_MEMBER ON (BOARD_WRITER = MEMBER_NO)
+		ORDER BY BOARD_NO DESC
+	</entry>
+	
+	<!-- 게시글 검색 SQL -->
+	<entry key="searchList">
+		SELECT BOARD_NO, BOARD_TITLE, CREATE_DT, READ_COUNT, NVL(MEMBER_NM, '탈퇴회원') MEMBER_NM
+		FROM TB_BOARD
+		LEFT JOIN TB_MEMBER ON (BOARD_WRITER = MEMBER_NO)
+	</entry>
+	
+	<!-- 제목 검색 조건 -->
+	<entry key="title">
+		WHERE BOARD_TITLE LIKE '%' || ? || '%'
+		ORDER BY BOARD_NO DESC
+	</entry>
+	
+	<!-- 내용 검색 조건 -->
+	<entry key="content">
+		WHERE BOARD_CONTENT LIKE '%' || ? || '%'
+		ORDER BY BOARD_NO DESC
+	</entry>
+	
+	<!-- 제목 + 내용 검색 조건 -->
+	<entry key="title_content">
+		WHERE BOARD_TITLE LIKE '%' || ? || '%'
+		OR BOARD_CONTENT LIKE '%' || ? || '%'
+		ORDER BY BOARD_NO DESC
+	</entry>
+	
+	
+	<!-- 작성자 검색 조건 -->
+	<entry key="writer">
+		WHERE MEMBER_NM = ?
+		ORDER BY BOARD_NO DESC
+	</entry>
+
+</properties>

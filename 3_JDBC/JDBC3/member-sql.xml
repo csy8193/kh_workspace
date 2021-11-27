@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<!-- 로그인 SQL -->
+	<entry key="login">
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NM, PHONE FROM TB_MEMBER
+		WHERE MEMBER_ID = ?
+		AND MEMBER_PW = ?
+	</entry>
+	
+	<!-- 로그인 중복 검사 SQL -->
+	<entry key="idDupCheck">
+		SELECT COUNT(*) FROM TB_MEMBER
+		WHERE MEMBER_ID = ?
+	</entry>
+	
+	
+	<!-- 회원가입 SQL -->
+	<entry key="signUp">
+		INSERT INTO TB_MEMBER 
+		VALUES( SEQ_MEMBER_NO.NEXTVAL, ?, ?, ?, ?)
+	</entry>
+	
+	
+	<!-- 내 정보 수정 SQL -->
+	<entry key="updateMember">
+		UPDATE TB_MEMBER SET 
+		MEMBER_PW = ?,
+		PHONE = ?
+		WHERE MEMBER_NO = ?
+	</entry>
+	
+	
+	<!-- 회원 탈퇴 SQL -->
+	<entry key="deleteMember">
+		DELETE FROM TB_MEMBER 
+		WHERE MEMBER_NO = ? 
+		AND MEMBER_PW = ?
+	</entry>
+
+
+
+
+
+
+
+</properties>

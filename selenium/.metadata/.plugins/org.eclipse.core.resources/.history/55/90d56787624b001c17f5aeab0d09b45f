@@ -1,0 +1,24 @@
+package edu.kh.uitest.ex;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Example06 {
+	public static void main(String[] args) {
+		
+		System.setProperty("webdriver.chrome.driver", 
+							"C:/tools/selenium/chromedriver.exe");
+		
+		WebDriver driver = new ChromeDriver();
+		
+		driver.get("http://kh-aclass.xyz:8081/Selenium/exam1/iframeTest.html");
+		
+		
+		// iframe 내부에 작성된 id input 요소를 얻어와 "test" 값 전달
+//		WebElement id = driver.findElement(By.id("id"));
+		WebElement id = driver.findElement(By.xpath("iframe/html/body/div/fieldset/ul/li[1]/input"));
+		id.sendKeys("test");
+	}
+}

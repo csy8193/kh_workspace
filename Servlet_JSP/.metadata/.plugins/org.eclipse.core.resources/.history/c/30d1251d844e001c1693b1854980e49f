@@ -1,0 +1,5 @@
+package edu.kh.servlet.model.vo;
+
+public class Member {
+
+}

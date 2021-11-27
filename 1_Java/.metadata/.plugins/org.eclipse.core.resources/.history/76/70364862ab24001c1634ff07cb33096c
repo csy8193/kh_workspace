@@ -1,0 +1,16 @@
+package edu.kh.collection.model.vo;
+
+public class Student {
+	// class란? 객체를 만들기 위한 설계도 필드, 메소드(+생성자)로 이루어짐
+	
+	// 접근 제한자
+	// + public : 같은 프로젝트 내부 어디서든
+	// # protected : 같은 패키지 + 상속 관계
+	// ~ (default) : 같은 패키지
+	// - private : 같은 객체 내에서만 접근 가능
+	
+	private String name;
+	private int age;
+	private int grade;
+	// -> 캡슐화 원칙에 의해서 private으로 선언
+}

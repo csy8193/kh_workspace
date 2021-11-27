@@ -1,0 +1,12 @@
+package edu.kh.collection.model.vo;
+
+public class Person {
+	
+	// 필드
+	private char gender;
+	private double height;
+	
+	// 기본생성자
+	public Person() { }
+	
+}

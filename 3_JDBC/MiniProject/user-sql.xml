@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="checkId">
+		SELECT COUNT(*) FROM TB_USER
+		WHERE USER_ID = ?
+	</entry>
+	
+	<entry key="userReg">
+		INSERT INTO TB_USER
+		VALUES(SEQ_USER_NO.NEXTVAL, ?, ?, ?)
+	</entry>
+	
+	<entry key="login">
+		SELECT USER_NO, USER_ID, USER_NAME
+		FROM TB_USER
+		WHERE USER_ID = ?
+		AND USER_PW = ?
+	</entry>
+	
+	<entry key="checkPw">
+		SELECT COUNT(*) FROM TB_USER
+		WHERE USER_NO = ?
+		AND USER_PW = ?
+	</entry>
+	
+	<entry key="changePw">
+		UPDATE TB_USER SET USER_PW = ?
+		WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="deleteUser">
+		DELETE FROM TB_USER WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="allRanking">
+		SELECT ALLRANK, (NVL(UPDOWN_SCORE,0) + NVL(RPS_SCORE,0)) SCORE, USER_NAME FROM (
+		SELECT RANK() OVER( ORDER BY NVL(UPDOWN_SCORE,0) + NVL(RPS_SCORE,0) DESC ) ALLRANK, USER_NO,NVL(UPDOWN_SCORE,0) UPDOWN_SCORE, NVL(RPS_SCORE,0) RPS_SCORE, USER_NAME
+		FROM TB_USER
+		JOIN TB_GAME USING(USER_NO)
+		)
+	</entry>
+	
+</properties>

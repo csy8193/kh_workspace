@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+
+	<entry key="userCheck">
+		SELECT COUNT(*) FROM TB_GAME
+		WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="newRpsGame">
+		INSERT INTO TB_GAME(GAME_NO, RPS_SCORE, USER_NO, RPS_YN)
+		VALUES(SEQ_GAME_NO.NEXTVAL, ?, ?, 1)
+	</entry>
+	
+	<entry key="rpsGame">
+		UPDATE TB_GAME SET RPS_SCORE = NVL(RPS_SCORE,0) + ?, RPS_YN = 1
+		WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="selectRpsScore">
+		SELECT RPS_RANK, RPS_SCORE, RPS_YN FROM (
+			SELECT RANK() OVER( ORDER BY RPS_SCORE DESC ) RPS_RANK, USER_NO, RPS_SCORE, RPS_YN
+			FROM TB_USER
+			JOIN TB_GAME USING(USER_NO)
+			WHERE RPS_YN = 1
+			)
+		WHERE USER_NO = ?
+	</entry>
+		
+	<entry key="rpsAllRank">
+		SELECT RPS_RANK, RPS_SCORE, USER_NAME FROM (
+			SELECT RANK() OVER( ORDER BY RPS_SCORE DESC ) RPS_RANK, USER_NO, RPS_SCORE, USER_NAME
+			FROM TB_USER
+			JOIN TB_GAME USING(USER_NO)
+			WHERE RPS_YN = 1
+			)
+	</entry>
+	
+	<entry key="upDownGame">
+		UPDATE TB_GAME SET UPDOWN_SCORE = NVL(UPDOWN_SCORE,0) + ?, UPDOWN_YN = 1
+		WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="newUpDownGame">
+		INSERT INTO TB_GAME(GAME_NO, UPDOWN_SCORE, USER_NO, UPDOWN_YN)
+		VALUES(SEQ_GAME_NO.NEXTVAL, ?, ?, 1)
+	</entry>
+	
+	<entry key="selectUpDownScore">
+		SELECT UPDOWN_RANK, UPDOWN_SCORE, UPDOWN_YN FROM (
+			SELECT RANK() OVER( ORDER BY UPDOWN_SCORE DESC ) UPDOWN_RANK, USER_NO, UPDOWN_SCORE, UPDOWN_YN
+			FROM TB_USER
+			JOIN TB_GAME USING(USER_NO)
+			WHERE UPDOWN_YN = 1
+			)
+		WHERE USER_NO = ?
+	</entry>
+	
+	
+	<entry key="upDownAllRank">
+		SELECT UPDOWN_RANK, UPDOWN_SCORE, USER_NAME FROM (
+			SELECT RANK() OVER( ORDER BY UPDOWN_SCORE DESC ) UPDOWN_RANK, USER_NO, UPDOWN_SCORE, USER_NAME
+			FROM TB_USER
+			JOIN TB_GAME USING(USER_NO)
+			WHERE UPDOWN_YN = 1
+			)
+	</entry>
+	
+	
+	
+</properties>

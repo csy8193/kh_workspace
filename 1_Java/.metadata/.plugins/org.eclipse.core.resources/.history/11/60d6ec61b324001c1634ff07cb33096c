@@ -1,0 +1,12 @@
+package edu.kh.collection.run;
+
+import edu.kh.collection.model.service.CollectionService;
+
+public class CollectionRun {
+	public static void main(String[] args) {
+		
+		CollectionService service = new CollectionService();
+		
+		service.example1();
+	}
+}

@@ -1,0 +1,10 @@
+package edu.kh.uitest.ex;
+
+public class Example04 {
+	public static void main(String[] args) {
+		
+		// 네이버 홈페이지 -> 로그인 페이지 -> 로그인
+		
+		
+	}
+}

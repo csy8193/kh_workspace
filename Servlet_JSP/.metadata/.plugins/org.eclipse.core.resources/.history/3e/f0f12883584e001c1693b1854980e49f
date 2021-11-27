@@ -1,0 +1,52 @@
+package edu.kh.servlet.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class SignUpServlet extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		// HttpServletRequest req : 요청과 관련된 정보, 데이터(값)을 가지고있는 객체
+		
+		// HttpServletResponse res : 응답과 관련된 정보, 스트림을 가지고 있는 객체
+		
+		// input 태그에 작성되어 전달 받은 값을 변수에 저장
+		
+		String memberId = req.getParameter("memberId");
+		String memberPw = req.getParameter("memberPw");
+		String memberName = req.getParameter("memberName");
+		String memberEmail = req.getParameter("memberEmail");
+		
+		System.out.println(memberId);
+		System.out.println(memberPw);
+		System.out.println(memberName);
+		System.out.println(memberEmail);
+	}
+	
+	
+	// post 방식을 처리하는 메소드
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		// POST 방식으로 데이터(값)를 전달하게 되면
+		// 문자 인코딩이 지정되어 있지 않아 2byte 범위의 문자(한글, 한자, 이모티콘 등등)
+		// 들이 모두 깨져서 보이게 된다
+		
+		String memberId = req.getParameter("memberId");
+		String memberPw = req.getParameter("memberPw");
+		String memberName = req.getParameter("memberName");
+		String memberEmail = req.getParameter("memberEmail");
+		
+		System.out.println(memberId);
+		System.out.println(memberPw);
+		System.out.println(memberName);
+		System.out.println(memberEmail);
+		
+		
+	}
+}
