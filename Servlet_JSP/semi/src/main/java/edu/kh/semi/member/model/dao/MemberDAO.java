@@ -78,4 +78,33 @@ public class MemberDAO {
 		return loginMember;
 	}
 
+	/** 회원가입 DAO
+	 * @param conn
+	 * @param member
+	 * @return result (1 성공)
+	 * @throws Exception
+	 */
+	public int signUp(Connection conn, Member member) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("signUp");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getMemberPw());
+			pstmt.setString(3, member.getMemberName());
+			pstmt.setString(4, member.getMemberPhone());
+			pstmt.setString(5, member.getMemberEmail());
+			pstmt.setString(6, member.getMemberAddress());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
 }
