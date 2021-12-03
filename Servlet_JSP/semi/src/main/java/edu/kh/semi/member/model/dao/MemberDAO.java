@@ -90,6 +90,7 @@ public class MemberDAO {
 		try {
 			String sql = prop.getProperty("signUp");
 			pstmt = conn.prepareStatement(sql);
+			System.out.println(member);
 			pstmt.setString(1, member.getMemberId());
 			pstmt.setString(2, member.getMemberPw());
 			pstmt.setString(3, member.getMemberName());

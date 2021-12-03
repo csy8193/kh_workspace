@@ -172,6 +172,13 @@ public class LoginServlet extends HttpServlet{
 		}catch(Exception e){
 			e.printStackTrace();
 			
+			String errorMessage = "로그인중 문제가 발생했습니다";
+			req.setAttribute("errorMessage", errorMessage);
+			req.setAttribute("e", e);
+			
+			String path = "/WEB-INF/views/common/error.jsp";
+			req.getRequestDispatcher(path).forward(req, resp);
+			
 		}
 		
 		

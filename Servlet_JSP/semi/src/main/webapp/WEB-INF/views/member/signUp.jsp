@@ -144,7 +144,7 @@
 							<label for="postcodify_search_button">우편번호</label>
 						</div>
 						<div class="col-sm-3">
-							<input type="text" name="address" class="form-control postcodify_postcode5" disabled>
+							<input type="text" name="address" class="form-control postcodify_postcode5">
 						</div>
 						<div class="col-sm-3">
 							<button type="button" class="btn btn-primary" id="postcodify_search_button">검색</button>
@@ -156,7 +156,7 @@
 							<label for="address1">도로명 주소</label>
 						</div>
 						<div class="col-md-9">
-							<input type="text" class="form-control postcodify_address" name="address" id="address1" disabled>
+							<input type="text" class="form-control postcodify_address" name="address" id="address1">
 						</div>
 					</div>
 
