@@ -16,5 +16,17 @@
 		VALUES(SEQ_MEMBER_NO.NEXTVAL, ?, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT)
 	
 	</entry>
+	
+	<entry key="idDupCheck">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE STATUS_CD != 101
+		AND MEMBER_ID = ?
+	</entry>
+	
+	<entry key="emailDupCheck">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE STATUS_CD != 101
+		AND MEMBER_EMAIL = ?
+	</entry>
 
 </properties>

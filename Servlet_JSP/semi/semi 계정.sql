@@ -202,3 +202,13 @@ ALTER TABLE MEMBER MODIFY STATUS_CD DEFAULT 100;
 -- GRADE_CD 기본값 지정
 ALTER TABLE MEMBER MODIFY GRADE_CD DEFAULT 200;
 
+
+
+-- 아이디 중복 검사
+-- (탈퇴 회원 제외, 아이디가 일치하는 회원만 조회)
+SELECT COUNT(*) FROM MEMBER
+WHERE STATUS_CD != 101
+AND MEMBER_ID = 'user10';
+
+-- 결과 1 == 중복O
+-- 결과 0 == 중복X

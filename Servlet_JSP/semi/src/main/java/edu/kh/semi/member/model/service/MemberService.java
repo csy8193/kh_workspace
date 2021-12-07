@@ -54,4 +54,35 @@ public class MemberService {
 		return result;
 	}
 
+	/** 아이디 중복 확인 서비스
+	 * @param inputId
+	 * @return result (1 중복)
+	 * @throws Exception
+	 */
+	public int idDupCheck(String inputId) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.idDupCheck(conn, inputId);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	/** 이메일 중복 확인 서비스
+	 * @param email
+	 * @return result (1 중복)
+	 * @throws Exception
+	 */
+	public int emailDupCheck(String email) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.emailDupCheck(conn, email);
+		
+		close(conn);
+		
+		
+		return result;
+	}
+
 }
