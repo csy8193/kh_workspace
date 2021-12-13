@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Map;
 import java.util.Properties;
 
 import edu.kh.semi.member.model.vo.Member;
@@ -161,6 +162,118 @@ public class MemberDAO {
 			
 		} finally {
 			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
+	public Member idSearch(Connection conn, String inputId) throws Exception{
+		Member member = null;
+		
+		try {
+			String sql = prop.getProperty("idSearch");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, inputId);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				member = new Member();
+				
+				member.setMemberId(inputId);
+				member.setMemberName(rs.getString("MEMBER_NM"));
+				member.setMemberPhone(rs.getString("MEMBER_PHONE"));
+				member.setMemberEmail(rs.getString("MEMBER_EMAIL"));
+				member.setMemberAddress(rs.getString("MEMBER_ADDR"));
+				
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return member;
+	}
+
+	/** 내 정보 수정 DAO
+	 * @param conn
+	 * @param member
+	 * @return result (1 성공)
+	 * @throws Exception
+	 */
+	public int update(Connection conn, Member member) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("update");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberPhone());
+			pstmt.setString(2, member.getMemberEmail());
+			pstmt.setString(3, member.getMemberAddress());
+			pstmt.setInt(4, member.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
+	/** 비밀번호 변경 DAO
+	 * @param conn
+	 * @param currentPw
+	 * @param newPw1
+	 * @param memberNo
+	 * @return result (1 성공)
+	 * @throws Exception
+	 */
+	public int updatePw(Connection conn, String currentPw, String newPw1, int memberNo) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updatePw");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newPw1);
+			pstmt.setString(2, currentPw);
+			pstmt.setInt(3, memberNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+			
+		}
+		return result;
+	}
+
+	/** 회원 탈퇴 DAO
+	 * @param map
+	 * @param conn
+	 * @return result (1 성공)
+	 * @throws Exception
+	 */
+	public int secession(Map<String, String> map, Connection conn) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("secession");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, map.get("memberNo"));
+			// -> 숫자만 작성된 문자열 같은 경우 DBMS에서 숫자로 인식할 수 있으므로
+			// 	  꼭 int형 파싱을 할 필요가 없다.
+			pstmt.setString(2, map.get("currentPw"));
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
 			close(pstmt);
 			
 		}

@@ -212,3 +212,104 @@ AND MEMBER_ID = 'user10';
 
 -- 결과 1 == 중복O
 -- 결과 0 == 중복X
+
+
+
+--------------------------------------------------------------------------------
+-- CATEGORY 샘플 데이터
+INSERT INTO CATEGORY VALUES(1, '잡담');
+INSERT INTO CATEGORY VALUES(2, '질문');
+INSERT INTO CATEGORY VALUES(3, '정보');
+
+SELECT * FROM CATEGORY;
+COMMIT;
+
+-- BOARD_STATUS 샘플 데이터 추가
+INSERT INTO BOARD_STATUS VALUES(300, '정상');
+INSERT INTO BOARD_STATUS VALUES(301, '블라인드');
+INSERT INTO BOARD_STATUS VALUES(302, '삭제');
+
+SELECT * FROM BOARD_STATUS;
+COMMIT;
+
+
+-- BOARD 샘플 데이터 추가 (500개)                 
+BEGIN
+    FOR I IN 1..500 LOOP
+        INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL,
+                        SEQ_BOARD_NO.CURRVAL || '번째 게시글',
+                        SEQ_BOARD_NO.CURRVAL || '번째 게시글입니다.',
+                        DEFAULT, DEFAULT, DEFAULT,
+                        61, 300, FLOOR(DBMS_RANDOM.VALUE(1,4)));
+    END LOOP;
+END;
+/
+
+SELECT COUNT(*) FROM BOARD;
+COMMIT;
+
+-- 게시글 상태가 섞여 있는 게시글 100개 생성
+BEGIN
+    FOR I IN 1..100 LOOP
+        INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL,
+                        SEQ_BOARD_NO.CURRVAL || '번째 게시글',
+                        SEQ_BOARD_NO.CURRVAL || '번째 게시글입니다.',
+                        DEFAULT, DEFAULT, DEFAULT,
+                        61, 300 + FLOOR(DBMS_RANDOM.VALUE(0,3)),
+                        FLOOR(DBMS_RANDOM.VALUE(1,4)));
+    END LOOP;
+END;
+/
+COMMIT;
+
+
+-- 게시글 목록 조회
+-- 글번호, 제목, 작성자, 조회수, 작성일, 카테고리, 상태코드
+SELECT BOARD_NO, BOARD_TITLE, MEMBER_NO, MEMBER_NM,
+        READ_COUNT,
+        -- CREATE_DT,
+        -- 게시글 작성 시간으로 부터 1일이 지나지 않은 경우 -> 16:12 시간 작성
+        -- 게시글 작성 시간으로 부터 1일이 지난 경우 -> 2021-12-12 날짜 작성
+        CASE WHEN SYSDATE - CREATE_DT < 1
+            THEN TO_CHAR( CREATE_DT, 'HH24:MI' )
+        
+        ELSE TO_CHAR( CREATE_DT, 'YYYY-MM-DD' )
+        END AS "CREATE_DT",
+        
+        CATEGORY_CD, CATEGORY_NM,
+        BOARD_STATUS_CD, BOARD_STATUS_NM
+
+FROM BOARD
+JOIN MEMBER USING(MEMBER_NO)
+JOIN CATEGORY USING(CATEGORY_CD)
+JOIN BOARD_STATUS USING(BOARD_STATUS_CD);
+
+-- 게시글 목록 조회용 VIEW 생성
+CREATE OR REPLACE VIEW BOARD_LIST AS 
+SELECT BOARD_NO, BOARD_TITLE, MEMBER_NO, MEMBER_NM,
+        READ_COUNT,
+        -- CREATE_DT,
+        -- 게시글 작성 시간으로 부터 1일이 지나지 않은 경우 -> 16:12 시간 작성
+        -- 게시글 작성 시간으로 부터 1일이 지난 경우 -> 2021-12-12 날짜 작성
+        CASE WHEN SYSDATE - CREATE_DT < 1
+            THEN TO_CHAR( CREATE_DT, 'HH24:MI' )
+        
+        ELSE TO_CHAR( CREATE_DT, 'YYYY-MM-DD' )
+        END AS "CREATE_DT",
+        
+        CATEGORY_CD, CATEGORY_NM,
+        BOARD_STATUS_CD, BOARD_STATUS_NM
+
+FROM BOARD
+JOIN MEMBER USING(MEMBER_NO)
+JOIN CATEGORY USING(CATEGORY_CD)
+JOIN BOARD_STATUS USING(BOARD_STATUS_CD);
+
+
+SELECT * FROM
+(SELECT ROWNUM RNUM, A.*
+        FROM (SELECT * FROM BOARD_LIST
+        WHERE BOARD_STATUS_CD != 302
+        ORDER BY BOARD_NO DESC) A)
+WHERE RNUM BETWEEN 21 AND 30;
+

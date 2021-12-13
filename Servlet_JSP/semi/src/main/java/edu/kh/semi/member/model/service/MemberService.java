@@ -3,6 +3,7 @@ package edu.kh.semi.member.model.service;
 import static edu.kh.semi.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.Map;
 
 import edu.kh.semi.member.model.dao.MemberDAO;
 import edu.kh.semi.member.model.vo.Member;
@@ -81,6 +82,71 @@ public class MemberService {
 		
 		close(conn);
 		
+		
+		return result;
+	}
+
+	/** 아이디로 회원 정보 검색 서비스
+	 * @param inputId
+	 * @return member(null 조회결과 없음)
+	 * @throws Exception
+	 */
+	public Member idSearch(String inputId) throws Exception{
+		Connection conn = getConnection();
+		
+		Member member = new MemberDAO().idSearch(conn, inputId);
+		
+		close(conn);
+		
+		return member;
+	}
+
+	/** 내 정보 수정 서비스
+	 * @param member
+	 * @return result (1 성공)
+	 * @throws Exception
+	 */
+	public int update(Member member) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.update(conn, member);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		return result;
+	}
+
+	/** 비밀번호 변경 서비스
+	 * @param currentPw
+	 * @param newPw1
+	 * @param memberNo
+	 * @return result (1 성공)
+	 * @throws Exception
+	 */
+	public int updatePw(String currentPw, String newPw1, int memberNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.updatePw(conn, currentPw, newPw1, memberNo);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		return result;
+	}
+
+	/** 회원 탈퇴 서비스
+	 * @param map
+	 * @return result (1 성공)
+	 * @throws Exception
+	 */
+	public int secession(Map<String, String> map) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.secession(map, conn);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
 		
 		return result;
 	}

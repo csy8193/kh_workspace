@@ -28,5 +28,30 @@
 		WHERE STATUS_CD != 101
 		AND MEMBER_EMAIL = ?
 	</entry>
+	
+	<entry key="idSearch">
+		SELECT MEMBER_NM, MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDR
+		FROM MEMBER
+		WHERE STATUS_CD != 101 AND GRADE_CD = 200 AND MEMBER_ID = ?
+	
+	</entry>
+	
+	<entry key="update">
+		UPDATE MEMBER SET MEMBER_PHONE = ?, MEMBER_EMAIL = ?, MEMBER_ADDR = ?
+		WHERE MEMBER_NO = ?
+	
+	</entry>
+	
+	<entry key="updatePw">
+		UPDATE MEMBER SET MEMBER_PW = ? WHERE MEMBER_PW = ? AND MEMBER_NO = ?
+	
+	</entry>
+	
+	<entry key="secession">
+		UPDATE MEMBER SET
+		STATUS_CD = (SELECT STATUS_CD FROM MEMBER_STATUS WHERE STATUS_NM = '탈퇴')
+		WHERE MEMBER_NO = ? AND MEMBER_PW = ?
+	
+	</entry>
 
 </properties>

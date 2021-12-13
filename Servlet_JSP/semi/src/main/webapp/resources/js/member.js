@@ -181,10 +181,12 @@ $("#email").on("input", function(){
             success : function(result){
                 if(result > 0){
                     $("#checkEmail").text("이미 사용중인 이메일입니다.").css("color", "red");
+                    signUpCheckObj.email = false;
+
 
                 }else{
                     $("#checkEmail").text("사용 가능합니다").css("color", "green");
-
+                    signUpCheckObj.email = true;
 
                 }
             },

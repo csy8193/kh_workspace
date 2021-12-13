@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 	<!-- header include -->
 	<jsp:include page="header.jsp" />
@@ -25,9 +26,16 @@
 	
 	<section class="py-5">
 	  <div class="container">
-	    <h1>Section Heading</h1>
-	    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-	    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
+	    <h1>아이디가 일치하는 회원정보 조회(AJAX)</h1>
+	    <p class="lead">
+			검색할 아이디 : <input type="text" id="searchId">
+			<button type="button" id="idSearchBtn">아이디 검색</button>
+		</p>
+		
+		<table>
+			<tbody id="idSearchResult">
+			</tbody>
+		</table>
 	  </div>
 	</section>
 	
