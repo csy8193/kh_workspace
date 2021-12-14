@@ -3,6 +3,12 @@
 
 <properties>
 
+	<entry key="getListCount">
+		SELECT COUNT(*) FROM BOARD WHERE BOARD_STATUS_CD != 302
+	</entry>
+	
+	
+	
 	<entry key="selectBoardList">
 		SELECT * FROM
 		(SELECT ROWNUM RNUM, A.*
