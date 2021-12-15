@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import edu.kh.semi.board.model.vo.Board;
+import edu.kh.semi.board.model.vo.Category;
 import edu.kh.semi.board.model.vo.Pagination;
 
 public class BoardDAO {
@@ -107,5 +108,94 @@ public class BoardDAO {
 		return boardList;
 	}
 
+	/** 게시글 상세 조회
+	 * @param conn
+	 * @param boardNo
+	 * @return board (없으면 null)
+	 * @throws Exception
+	 */
+	public Board selectBoard(Connection conn, int boardNo) throws Exception{
+		Board board = null;
+		
+		try {
+			String sql = prop.getProperty("selectBoard");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				board = new Board();
+				board.setBoardNo(boardNo);
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setMemberNo(rs.getInt("MEMBER_NO"));
+				board.setMemberName(rs.getString("MEMBER_NM"));
+				board.setCreateDate(rs.getString("CREATE_DT"));
+				board.setModifyDate(rs.getString("MODIFY_DT"));
+				board.setCategoryCode(rs.getInt("CATEGORY_CD"));
+				board.setCategoryName(rs.getString("CATEGORY_NM"));
+				board.setReadCount(rs.getInt("READ_COUNT"));
+				board.setBoardStatusName(rs.getString("BOARD_STATUS_NM"));
+			}
+		} finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		return board;
+	}
+
+	/** 조회수 증가
+	 * @param conn 
+	 * @param boardNo
+	 * @return result(1 성공, 0 실패)
+	 * @throws Exception
+	 */
+	public int increaseReadCount(Connection conn, int boardNo) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("increaseReadCount");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+			
+		}
+		return result;
+	}
+
+	/**
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Category> selectCategory(Connection conn) throws Exception{
+		List<Category> category = new ArrayList<Category>();
+		
+		try {
+			String sql = prop.getProperty("selectCategory");
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				Category cate = new Category();
+				cate.setCategoryCode(rs.getInt("CATEGORY_CD"));
+				cate.setCategoryName(rs.getString("CATEGORY_NM"));
+				
+				category.add(cate);
+				
+			}
+		} finally {
+			close(rs);
+			close(stmt);
+			
+		}
+		
+		
+		return category;
+	}
 
 }
