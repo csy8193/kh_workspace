@@ -40,28 +40,49 @@
 			 		<span class="float-right">조회수 ${board.readCount}</span>
 				</p>
 				<hr>
+				
+					<%-- imgList에 존재하는 이미지의 레벨에 따라 변수 선언 --%>
+					<c:forEach items="${board.imgList}" var="img">
+						<c:choose>
 
+							<c:when test="${img.imgLevel == 0 }">
+								<c:set var="img0" value="${contextPath}${img.imgPath}${img.imgName}"/>
+							</c:when>
+							<c:when test="${img.imgLevel == 1 }">
+								<c:set var="img1" value="${contextPath}${img.imgPath}${img.imgName}"/>
+							</c:when>
+							<c:when test="${img.imgLevel == 2 }">
+								<c:set var="img2" value="${contextPath}${img.imgPath}${img.imgName}"/>
+							</c:when>
+							<c:when test="${img.imgLevel == 3 }">
+								<c:set var="img3" value="${contextPath}${img.imgPath}${img.imgName}"/>
+							</c:when>
+
+
+
+						</c:choose>
+					</c:forEach>
 
 					<!-- 이미지 출력 -->
 					<div class="form-inline mb-2">
 						<label class="input-group-addon mr-3 insert-label">썸네일</label>
 						<div class="boardImg thubnail">
-							<!-- <img src=""> -->
+							<img src="${img0}">
 						</div>
 					</div>
 	
 					<div class="form-inline mb-2">
 						<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
 						<div class="mr-2 boardImg">
-							<!-- <img src=""> -->
+							<img src="${img1}">
 						</div>
 	
 						<div class="mr-2 boardImg">
-							<!-- <img src=""> -->
+							<img src="${img2}">
 						</div>
 	
 						<div class="mr-2 boardImg">
-							<!-- <img src=""> -->
+							<img src="${img3}">
 						</div>
 					</div>
 				
@@ -87,13 +108,22 @@
 				
 				
 				<%-- 댓글 영역 include 예정 --%>
+				<jsp:include page="reply.jsp" ></jsp:include>
 			</div>
 
 
 
 		</div>
 	</div>
+	
+	<form action="#" method="POST" name="requestForm">
+		<input type="hidden" name="cp" value="${param.cp }">
+		<input type="hidden" name="no" value="${param.no }">
+	</form>
+	
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	
+	<script src="${contextPath}/resources/js/board.js"></script>	
 	
 	
 </body>

@@ -3,13 +3,14 @@
 			var today = new Date();
 			var month = (today.getMonth() + 1);
 			var date = today.getDate();
-
+		
 			var str = today.getFullYear() + "-"
 					+ (month < 10 ? "0" + month : month) + "-"
 					+ (date < 10 ? "0" + date : date);
 			$("#today").html(str);
 		})();
-
+		
+		
 		// 유효성 검사 
 		function boardValidate() {
 			if ($("#boardTitle").val().trim().length == 0) {
@@ -17,28 +18,29 @@
 				$("#title").focus();
 				return false;
 			}
-
+		
 			if ($("#boardContent").val().trim().length == 0) {
 				alert("내용을 입력해 주세요.");
 				$("#content").focus();
 				return false;
 			}
 		}
-
+		
 		// 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
 		$(function() {
 			$(".boardImg").on("click", function() {
 				var index = $(".boardImg").index(this);
-							// 현재 클릭된 요소가 .boardImg 중 몇 번째 인덱스인지 반환
+						// 현재 클릭된 요소가 .boardImg 중 몇 번째 인덱스인지 반환
 				$("[type=file]").eq(index).click();
+				// 타입이 file인 요소 중 몇번째 인덱스 요소를 선택하여 클릭해라
 			});
 
 		});
 
-		
 		// 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
 		function loadImg(value, num) {
-
+			// 매개변수 value == 클릭된 input 요소
+		
 
 			// 파일이 선택된 경우 true
 			if (value.files && value.files[0]) {
@@ -63,3 +65,10 @@
 
 			}
 		}
+		
+		// 수정버튼 클릭 시 동작
+		function updateForm(){
+			document.requestForm.action = "updateForm";
+			document.requestForm.method = "POST";
+			document.requestForm.submit();
+		} 

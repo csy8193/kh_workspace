@@ -50,6 +50,12 @@
 													<strong style="color:red; font-size:11px;">관리자에 의해 블라인드 처리된 게시글입니다.</strong>
 												</c:when>
 												<c:otherwise>
+													
+													<c:if test="${board.imgList[0].imgLevel == 0}">
+														<img src="${contextPath}${board.imgList[0].imgPath}${board.imgList[0].imgName}">
+
+													</c:if>
+												
 													${board.boardTitle }
 												</c:otherwise>
 											</c:choose>
