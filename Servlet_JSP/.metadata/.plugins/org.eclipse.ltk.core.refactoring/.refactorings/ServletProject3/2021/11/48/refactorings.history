@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;driver.xml&apos; to &apos;driver.xml&apos;&#x0D;&#x0A;- Original project: &apos;ServletProject3&apos;&#x0D;&#x0A;- Destination element: &apos;driver.xml&apos;&#x0D;&#x0A;- Original element: &apos;driver.xml&apos;" description="Copy file" element1="src/main/java/edu/kh/servlet/sql/driver.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1637911351187" target="/ServletProject3/src/main/java/edu/kh/servlet/sql/driver.xml" units="0" version="1.0"/>
-</session>

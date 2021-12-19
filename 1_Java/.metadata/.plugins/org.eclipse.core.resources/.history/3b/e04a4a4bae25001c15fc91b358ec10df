@@ -1,6 +1,0 @@
-package edu.kh.collection.model.service;
-
-public class MapService {
-	
-	// Map : Key와 Value 한 쌍이 데이터가 되어 이를 모아둔 객체
-}

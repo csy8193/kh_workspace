@@ -1,9 +1,0 @@
-package edu.kh.uitest.ex;
-
-public class Example10 {
-	public static void main(String[] args) {
-		System.setProperty("webdriver.chrome.driver", "C:/tools/selenium/chromedriver.exe");
-		
-		
-	}
-}

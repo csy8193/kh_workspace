@@ -1,7 +1,0 @@
-package edu.kh.uitest.ex;
-
-public class Example06 {
-	public static void main(String[] args) {
-		
-	}
-}

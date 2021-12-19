@@ -1,6 +1,0 @@
-INDEX VERSION 1.131+C:\Users\Administrator\Desktop\workspace\selenium_test\.metadata\.plugins\org.eclipse.jdt.core
-3266557002.index
-1050436885.index
-1148761079.index
-2352654726.index
-3130045185.index
