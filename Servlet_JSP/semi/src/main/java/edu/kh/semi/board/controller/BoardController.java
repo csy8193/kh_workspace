@@ -165,7 +165,6 @@ public class BoardController extends HttpServlet{
 					// 1. 업로드 되는 파일 전체 합의 최대 용량 지정(byte 단위)
 					int maxSize = 1024 * 1024 * 100; // 100MB
 					
-					
 					// 2. 업로드 되는 파일을 서버 컴퓨터 어디에 저장할지 경로 지정
 					// -> 특정 폴더의 컴퓨터 내부 절대 경로
 					HttpSession session = req.getSession();

@@ -101,6 +101,5 @@
 		
 		<script src="${contextPath}/resources/js/board.js"></script>
 		
-		
 </body>
 </html>
