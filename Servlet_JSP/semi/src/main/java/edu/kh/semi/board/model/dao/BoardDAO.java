@@ -248,10 +248,8 @@ public class BoardDAO {
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, board.getBoardNo());
-			pstmt.setString(2, board.getBoardTitle());
-			pstmt.setString(3, board.getBoardContent());
-			pstmt.setInt(4, board.getMemberNo());
-			pstmt.setInt(5, board.getCategoryCode());
+			pstmt.setString(2, board.getBoardContent());
+			pstmt.setInt(3, board.getMemberNo());
 
 			result = pstmt.executeUpdate();
 
