@@ -49,6 +49,15 @@ JOIN STATUS S ON(B.STATUS_CD = S.STATUS_CD);
 		        ORDER BY BOARD_NO DESC) A)
 		WHERE RNUM BETWEEN 1 AND 10;
 
+COMMIT;
 
+ALTER TABLE BOARD_PIC MODIFY BOARD_PIC_PATH NULL;
 
+select a.sid, a.serial# ,a.status
+from v$session a, v$lock b, dba_objects c
+where a.sid=b.sid and
+b.id1=c.object_id and
+b.type='TM' and
+c.object_name=BOARD_PIC;
 
+DROP TABLE BOARD_PIC;

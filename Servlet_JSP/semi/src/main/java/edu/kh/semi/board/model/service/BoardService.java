@@ -263,7 +263,7 @@ public class BoardService {
 			//    -> 만약 기존 데이터가 없으면 INSERT
 
 			for(BoardImage img : imgList) {
-
+				
 				result = dao.updateBoardImage(img, conn);
 				// - 기존 데이터를 수정 성공        -> result == 1
 				// - 기존 데이터가 없어서 수정 실패 -> result == 0
