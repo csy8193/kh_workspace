@@ -58,10 +58,23 @@ JOIN STATUS S ON(B.STATUS_CD = S.STATUS_CD);
 		WHERE RNUM BETWEEN 1 AND 100;
 
 
+<<<<<<< HEAD
+COMMIT;
+
+ALTER TABLE BOARD_PIC MODIFY BOARD_PIC_PATH NULL;
+=======
 SELECT count(*) FROM BOARD WHERE STATUS_CD != 2 AND (BOARD_CONTENT LIKE 'a' OR BOARD_TITLE LIKE 'a');
 
 SELECT count(*) FROM BOARD 
 JOIN BOARD_PIC USING(BOARD_NO)
 WHERE STATUS_CD != 2 AND (BOARD_CONTENT LIKE '%a%' OR BOARD_TITLE LIKE '%a%') AND (BOARD_PIC_LEVEL = 0 OR BOARD_PIC_LEVEL IS NULL);
+>>>>>>> c795cb04329eec7bc20df405d62e70d233c5437a
 
+select a.sid, a.serial# ,a.status
+from v$session a, v$lock b, dba_objects c
+where a.sid=b.sid and
+b.id1=c.object_id and
+b.type='TM' and
+c.object_name=BOARD_PIC;
 
+DROP TABLE BOARD_PIC;
