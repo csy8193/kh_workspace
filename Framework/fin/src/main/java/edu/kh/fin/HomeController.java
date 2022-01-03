@@ -30,7 +30,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	// 최상위 주소 ("/" == "/fin/") 요청 시 이를 제어하는 컨트롤러
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	/* @RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -42,6 +42,15 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
+	} */
+	
+	
+	// GET 방식 "/" 요청이 전달되었을 때 처리하는 메소드
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String mainForward() {
+		
+		
+		return "common/main";
 	}
 	
 	@RequestMapping(value = "/loginTest", method = RequestMethod.POST)

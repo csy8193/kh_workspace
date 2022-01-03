@@ -1,12 +1,28 @@
 package edu.kh.fin.member.model.vo;
 
+import java.sql.Date;
+
 public class Member {
+	private int memberNo;
 	private String memberId;
 	private String memberPw;
 	private String memberName;
-	private int memberAge;
+	private String memberPhone;
+	private String memberEmail;
+	private String memberAddress;
+	private Date enrollDate; // java.sql.Date
+	private int statusCode;
+	private int gradeCode;
 
 	public Member() {
+	}
+
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
 	public String getMemberId() {
@@ -33,18 +49,60 @@ public class Member {
 		this.memberName = memberName;
 	}
 
-	public int getMemberAge() {
-		return memberAge;
+	public String getMemberPhone() {
+		return memberPhone;
 	}
 
-	public void setMemberAge(int memberAge) {
-		this.memberAge = memberAge;
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
+	}
+
+	public String getMemberEmail() {
+		return memberEmail;
+	}
+
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
+	}
+
+	public String getMemberAddress() {
+		return memberAddress;
+	}
+
+	public void setMemberAddress(String memberAddress) {
+		this.memberAddress = memberAddress;
+	}
+
+	public Date getEnrollDate() {
+		return enrollDate;
+	}
+
+	public void setEnrollDate(Date enrollDate) {
+		this.enrollDate = enrollDate;
+	}
+
+	public int getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
+	}
+
+	public int getGradeCode() {
+		return gradeCode;
+	}
+
+	public void setGradeCode(int gradeCode) {
+		this.gradeCode = gradeCode;
 	}
 
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", memberPw=" + memberPw + ", memberName=" + memberName + ", memberAge="
-				+ memberAge + "]";
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberName="
+				+ memberName + ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberAddress="
+				+ memberAddress + ", enrollDate=" + enrollDate + ", statusCode=" + statusCode + ", gradeCode="
+				+ gradeCode + "]";
 	}
 
 }
