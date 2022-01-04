@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import edu.kh.fin.member.model.dao.MemberDAO;
 import edu.kh.fin.member.model.vo.Member;
 
 @Service // Service 레이어, 비즈니스 로직을 가진 클래스임을 명시 + Bean 등록
 public class MemberServiceImpl implements MemberService{
+	
+	@Autowired // bean으로 등록된 MemberDAO 의존성 주입(DI)
+	private MemberDAO dao;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
@@ -35,7 +39,22 @@ public class MemberServiceImpl implements MemberService{
 		// System.out.println(encoder.matches(member.getMemberPw(), temp));
 										// 평문					// 암호화
 		
+		// 로그인 DAO 호출
+		Member loginMember = dao.login(member.getMemberId());
 		
-		return null;
+		System.out.println(loginMember);
+		// 조회 성공시 Member 객체, 실패시 null
+		
+		// DB에 일치하는 아이디를 가진 회원이 있고
+		// 입력받은 비밀번호와 암호화된 비밀번호가 같을 때
+		if(loginMember != null && encoder.matches(member.getMemberPw(), loginMember.getMemberPw())) {
+			
+			loginMember.setMemberPw(null);
+		}else { // 로그인 실패
+			
+			loginMember = null;
+		}
+		
+		return loginMember;
 	}
 }
