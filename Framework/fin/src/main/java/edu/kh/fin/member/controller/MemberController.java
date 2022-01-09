@@ -1,5 +1,10 @@
 package edu.kh.fin.member.controller;
 
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,14 +13,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.kh.fin.common.Util;
 import edu.kh.fin.member.model.service.MemberService;
 import edu.kh.fin.member.model.vo.Member;
 
@@ -155,7 +163,7 @@ public class MemberController {
 			// 아이디 저장 Cookie 생성
 			
 			// 1. Cookie 객체생성(K:V 형태로 저장할 값 지정)
-			Cookie cookie = new Cookie("saveid", member.getMemberId());
+			Cookie cookie = new Cookie("saveId", member.getMemberId());
 			// 2. 쿠키 유지 시간 지정
 			if(save != null) {
 				cookie.setMaxAge(60 * 60 * 24 * 30); // 초 단위
@@ -209,5 +217,249 @@ public class MemberController {
 		status.setComplete();
 		
 		return "redirect:/";
+	}
+	
+	
+	// 회원가입 페이지 전환
+	@RequestMapping(value="signUp", method=RequestMethod.GET)
+	public String signUp() {
+		
+		return "member/signUp";
+	}
+	
+	
+	// @ResponseBody
+	// - 메소드에서 반환되는 값이
+	//	 forward를 위한 jsp 이름, redirect 주소가 아닌
+	//	 값 자체임을 알려주는 어노테이션
+	//	 --> ajax를 이용한 데이터 응답 시 사용
+	
+	// 아이디 중복 검사(ajax)
+	@RequestMapping(value="idDupCheck", method=RequestMethod.GET)
+	@ResponseBody
+	public int idDupCheck(String inputId) {
+		// @RequestParam 생략을 원하는 경우 파라미터가 null이 넘어오는지 확인
+		// -> 안넘어오면 생략 가능
+		
+		// 아이디 중복 검사 Service 호출 후 결과 반환 받기
+		int result = service.idDupCheck(inputId);
+		
+		return result;
+	}
+	
+	@RequestMapping(value="emailDupCheck", method=RequestMethod.GET)
+	@ResponseBody
+	public int emailDupCheck(String inputEmail) {
+		
+		int result = service.emailDupCheck(inputEmail);
+		
+		return result;
+	}
+	
+	
+	// 회원 가입
+	
+	@RequestMapping(value="signUp", method=RequestMethod.POST)
+	public String signUp(Member member, RedirectAttributes ra) {
+						// -> 커맨드객체  // redirect 시 데이터 전달
+		// 회원 가입 Service 호출 후 결과 반환 받기
+		
+		int result = service.signUp(member);
+		
+		// 메세지 전달용 변수 선언
+		String title;
+		String text;
+		String icon;
+		if(result > 0) { // 성공
+			title = "회원 가입 성공";
+			text = member.getMemberName() + "님의 회원 가입을 환영합니다";
+			icon = "success"; // success, error, info, warning
+			
+		}else {
+			title = "회원 가입 실패";
+			text = "관리자에게 문읮해주세요";
+			icon = "error"; // success, error, info, warning
+			
+		}
+		
+		ra.addFlashAttribute("title", title);
+		ra.addFlashAttribute("text", text);
+		ra.addFlashAttribute("icon", icon);
+		
+		return "redirect:/";
+	}
+	
+	
+	@RequestMapping(value="myPage", method=RequestMethod.GET)
+	public String myPage() {
+		
+		return "member/myPage";
+	}
+	
+	
+	// 회원 정보 수정
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String updateMember(@ModelAttribute("loginMember") Member loginMember, 
+								@RequestParam Map<String, String> param, // 모든 파라미터를 Map형식으로 저장
+								Member member, // 비어있는 Member객체 생성
+								RedirectAttributes ra
+								) {
+		
+		// 회원 정보 수정 시 필요한 값
+		// 1. 입력된 파라미터(이메일, 전화번호, 주소)
+		// 2. 로그인한 회원의 회원 번호(Session에서 얻어옴)
+		
+		
+		
+		// @ModelAttribute 이용 방식
+		// 1. 파라미터를 객체에 set하는 역할 -> 커맨드 객체 생성
+		// 2. @SessionAttributes를 이용해 등록된 Session 데이터를 얻어오는 역할
+		//		--> @ModelAttribute("Session키값")
+		
+		// member에 회원번호, 수정된 파라미터를 모두 담기
+		member.setMemberNo(loginMember.getMemberNo());
+		member.setMemberEmail(param.get("updateEmail"));
+		member.setMemberPhone(param.get("updatePhone"));
+		member.setMemberAddress(param.get("updateAddress"));
+		
+		
+		// 회원 정보 수정 Service 호출 후 결과 반환 받기
+		int result = service.updateMember(member);
+		
+		// sweetalert를 이용해서 수정 성공/실패 출력
+		String title = null;
+		String text = null;
+		String icon = null;
+		
+		if(result > 0) {
+			loginMember.setMemberEmail(member.getMemberEmail());
+			loginMember.setMemberPhone(member.getMemberPhone());
+			loginMember.setMemberAddress(member.getMemberAddress());
+			
+			title = "회원 정보 수정 성공";
+			icon = "success";
+			
+		}else {
+			title = "회원 정보 수정 실패";
+			text = "회원 정보 수정중 문제가 발생했습니다";
+			icon = "error";
+		}
+		
+		ra.addFlashAttribute("title", title);
+		ra.addFlashAttribute("text", text);
+		ra.addFlashAttribute("icon", icon);
+		
+		return "redirect:/member/myPage";
+	}
+	
+	
+	// 비밀번호 수정 화면 전환
+	@RequestMapping(value="updatePw", method=RequestMethod.GET)
+	public String updatePw() {
+		return "member/updatePw";
+	}
+	
+	
+	// 비밀번호 수정
+	@RequestMapping(value="updatePw", method=RequestMethod.POST)
+	public String updatePw(@ModelAttribute("loginMember") Member loginMember,
+							String currentPw, String newPw1, RedirectAttributes ra) {
+		
+		// 비밀번호 수정 흐름
+		// (Controller)
+		// 1. 회원번호 + 현재 비밀번호 + 새 비밀번호 서비스 호출
+		
+		// (Service)
+		// 2. 회원 번호를 이용해서 DB에 저장된 비밀번호 조회
+		// 3. DB 저장된 비밀번호와 입력된 현재 비밀번호 비교(matches() 사용)
+		// 4. 일치하면 새 비밀번호를 암호화 -> 비밀번호 변경 DAO 호출
+		// 5. 일치하지 않으면 Controller로 0 반환
+		
+		// (Controller)
+		// 6. 성공 여부에 따라 출력 메시지 지정 -> 리다이렉트
+		
+		
+		
+		// 1. 회원번호 + 현재 비밀번호 + 새 비밀번호 서비스 호출
+		// 회원번호 + 파라미터 저장용 Map 생성
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("memberNo", loginMember.getMemberNo() + "");
+		map.put("currentPw", currentPw);
+		map.put("newPw", newPw1);
+		
+		int result = service.updatePw(map);
+		
+		// 6. 성공 여부에 따라 출력 메시지 지정 -> 리다이렉트
+		if(result > 0) {
+			Util.swalSetMessage("비밀번호 변경 성공", "비밀번호가 변경되었습니다", "success", ra);
+			
+		}else {
+			Util.swalSetMessage("비밀번호 변경 실패", "비밀번호가 일치하지 않습니다", "error", ra);
+			
+		}
+		
+		
+		return "redirect:myPage";
+	}
+	
+	// 회원탈퇴 화면 이동
+	@RequestMapping(value="secession", method=RequestMethod.GET)
+	public String secession() {
+		
+		return "member/secession";
+	}
+	
+	
+	// 회원 탈퇴
+	@RequestMapping(value="secession", method=RequestMethod.POST)
+	public String secession(String currentPw, @ModelAttribute("loginMember") Member loginMember,
+							RedirectAttributes ra, SessionStatus status) {
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("memberNo", loginMember.getMemberNo() + "");
+		map.put("currentPw", currentPw);
+		
+		int result = service.secession(map);
+		
+		if(result > 0) {
+			status.setComplete();
+			
+			Util.swalSetMessage("회원 탈퇴 완료", "", "success", ra);
+			
+			return "redirect:/";
+		}else {
+			
+			Util.swalSetMessage("회원 탈퇴 실패", "비밀번호가 일치하지 않습니다", "error", ra);
+			
+			return "redirect:/member/secession";
+		}
+		
+		
+		
+	}
+	
+	
+	/* 스프링 예외 처리 방법
+	 * 
+	 * 1. 메소드별 try-catch / throws 예외 처리 (1순위)
+	 * 
+	 * 2. 컨트롤러 별로 예외 처리(@ExceptionHandler) (2순위)
+	 * 		-> DispatcherServlet(servlet-context.xml)에
+	 * 			<annotation-driven/> 이 수행되어야 사용 가능
+	 * 
+	 * 
+	 * 3. 전역(모든 클래스)에서 발생하는 예외를 하나의 클래스에서 처리
+	 * 	  (@ControllerAdvice) (3순위)
+	 * 
+	 *  */
+	
+	// @ExceptionHandler(처리할 예외.class)
+	@ExceptionHandler(SQLException.class)
+	public String exceptionHandler(Exception e, Model model) {
+		model.addAttribute("errorMessage", "회원 관련 서비스 이용 중 문제가 발생했습니다");
+		model.addAttribute("e", e);
+		
+		return "common/error";
 	}
 }

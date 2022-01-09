@@ -1,5 +1,7 @@
 package edu.kh.fin.member.model.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,5 +28,63 @@ public class MemberDAO {
 		
 		return loginMemeber;
 	}
+
+
+	/** 아이디 중복 검사
+	 * @param inputId
+	 * @return result
+	 */
+	public int idDupCheck(String inputId) {
+		
+		return sqlSession.selectOne("memberMapper.idDupCheck", inputId);
+	}
+
+
+	/** 아이디 중복 검사
+	 * @param inputEmail
+	 * @return result
+	 */
+	public int emailDupCheck(String inputEmail) {
+		return sqlSession.selectOne("memberMapper.emailDupCheck", inputEmail);
+	}
+
+
+	/** 회원 가입
+	 * @param member
+	 * @return result
+	 */
+	public int signUp(Member member) {
+		return sqlSession.insert("memberMapper.signUp", member);
+	}
+
+
+	/** 회원 정보 수정
+	 * @param member
+	 * @return result
+	 */
+	public int updateMember(Member member) {
+		return sqlSession.update("memberMapper.updateMember", member);
+	}
+
+
+	public String selectPw(String memberNo) {
+		
+		return sqlSession.selectOne("memberMapper.selectPw", memberNo);
+	}
+
+	public int updatePw(Map<String, String> map) {
+		return sqlSession.update("memberMapper.updatePw", map);
+	}
+
+
+	/** 회원 탈퇴
+	 * @param map
+	 * @return
+	 */
+	public int secession(Map<String, String> map) {
+		return sqlSession.update("memberMapper.secession", map);
+	}
+
+
 	
 }
