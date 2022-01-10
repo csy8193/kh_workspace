@@ -169,7 +169,7 @@ BEGIN
                     SEQ_BOARD_NO.CURRVAL || '번째 게시글',
                     SEQ_BOARD_NO.CURRVAL || '번째 게시글 입니다.',
                     DEFAULT, DEFAULT, DEFAULT, 
-                    24/*회원번호*/, FLOOR(DBMS_RANDOM.VALUE(1,6)),
+                    1/*회원번호*/, FLOOR(DBMS_RANDOM.VALUE(1,6)),
                     FLOOR(DBMS_RANDOM.VALUE(1,4)));
     END LOOP;
     
@@ -224,7 +224,7 @@ INSERT INTO BOARD_IMG VALUES(
     (SELECT * FROM (SELECT BOARD_NO FROM BOARD WHERE STATUS_CD NOT IN(4,5) ORDER BY 1 DESC) WHERE ROWNUM = 1)
     );
     
-    
+commit; 
     
     
     
@@ -249,5 +249,33 @@ SELECT * FROM BOARD_IMG
 WHERE BOARD_NO = 500
 ORDER BY IMG_LEVEL;
 
-commit;
+
+
+
+CREATE TABLE PRACTICE(
+    P_NO NUMBER PRIMARY KEY,
+    P_NAME VARCHAR2(50) NOT NULL,
+    P_LEVEL NUMBER NOT NULL
+);
+
+
+CREATE SEQUENCE SEQ_P_NO;
+
+/*반복 삽입 방법
+1. service에서 insert DAO를 for문으로 반복 호출
+    -> 구현이 간단하지만 속도, 부하 측면에서 좋지 않음
     
+2. INSERT ALL 사용
+    -> PK를 나타내는 시퀀스 증가가 이루어지지 않음
+    
+3. 서브 쿼리를 이용한 INSERT
+*/
+
+INSERT INTO PRACTICE 
+SELECT SEQ_P_NO.NEXTVAL, A.* FROM
+(SELECT '테스트1' P_NAME, 1 P_LEVEL FROM DUAL
+UNION ALL
+SELECT '테스트2' P_NAME, 2 P_LEVEL FROM DUAL
+UNION ALL
+SELECT '테스트3' P_NAME, 3 P_LEVEL FROM DUAL) A;
+

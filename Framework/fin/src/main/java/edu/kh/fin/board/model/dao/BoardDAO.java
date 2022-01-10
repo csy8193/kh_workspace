@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.kh.fin.board.model.vo.Board;
+import edu.kh.fin.board.model.vo.BoardImage;
+import edu.kh.fin.board.model.vo.Category;
 import edu.kh.fin.board.model.vo.Pagination;
 
 @Repository // 저장소(파일, DB)에 접근하는 객체(DAO)임을 알려줌 + Bean 등록
@@ -51,6 +53,41 @@ public class BoardDAO {
 	public Board selectBoard(int boardNo) {
 		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
 		// 게시글 정보 + 해당 게시글 이미지 정보
+	}
+
+	/** 게시글 조회 수 증가
+	 * @param boardNo
+	 * @return result
+	 */
+	public int increaseReadCount(int boardNo) {
+		return sqlSession.update("boardMapper.increaseReadCount", boardNo);
+	}
+
+	/** 카테고리 목록 조회
+	 * @return category
+	 */
+	public List<Category> selectCategory() {
+		return sqlSession.selectList("boardMapper.selectCategory");
+	}
+
+	/** 게시글 부분 삽입
+	 * @param board
+	 * @return boardNo
+	 */
+	public int insertBoard(Board board) {
+		
+		int result = sqlSession.insert("boardMapper.insertBoard", board);
+		
+		if(result > 0) return board.getBoardNo();
+		else 		   return 0;
+	}
+
+	/** 이미지 목록 삽입
+	 * @param imgList
+	 * @return result
+	 */
+	public int insertImgList(List<BoardImage> imgList) {
+		return sqlSession.insert("boardMapper.insertImgList", imgList);
 	}
 	
 }

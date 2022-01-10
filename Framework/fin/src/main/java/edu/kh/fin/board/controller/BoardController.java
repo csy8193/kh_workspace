@@ -2,19 +2,26 @@ package edu.kh.fin.board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.fin.board.model.service.BoardService;
 import edu.kh.fin.board.model.vo.Board;
+import edu.kh.fin.board.model.vo.Category;
 import edu.kh.fin.board.model.vo.Pagination;
 import edu.kh.fin.common.Util;
+import edu.kh.fin.member.model.vo.Member;
 
 @Controller // 컨트롤러임을 알려줌 + Bean등록
 @RequestMapping("/board/*") // /board로 시작하는 모든 요청을 받는 프론트 컨트롤러
@@ -61,10 +68,16 @@ public class BoardController {
 	@RequestMapping("view/{boardNo}")
 	public String selectBoard(@PathVariable(value="boardNo", required = false) int boardNo,
 							@RequestParam(value="cp", required=false, defaultValue = "1") int cp,
+							HttpSession session,
 							Model model, RedirectAttributes ra) {
 		
+		int memberNo = 0;
+		if(session.getAttribute("loginMember") != null) {
+			memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+		}
+		
 		// 게시글 조회 Service 호출
-		Board board = service.selectBoard(boardNo);
+		Board board = service.selectBoard(boardNo, memberNo);
 		
 		String path = null;
 		
@@ -81,6 +94,60 @@ public class BoardController {
 		return path;
 		
 	}
+	
+	@RequestMapping(value="insert", method=RequestMethod.GET)
+	public String boardInsert(Model model) {
+		
+		List<Category> category = service.selectCategory();
+		
+		model.addAttribute("category", category);
+		
+		return "board/boardInsert";
+	}
+	
+	
+	@RequestMapping(value="insert", method=RequestMethod.POST)
+	public String boardInsert(Board board,
+			@RequestParam(value="images", required=false) List<MultipartFile> images,
+			@ModelAttribute("loginMember") Member loginMember,
+			HttpSession session, RedirectAttributes ra) {
+		
+		/*
+		 * MultipartFile이 제공하는 메소드 
+		 * - getOriginalFilename() : 파일 원본명 반환 
+		 * - getSize() : 파일 크기 반환
+		 * - getInputStrem() : 파일에 대한 입력 스트림
+		 * - transferTo() : MultipartFile 객체는 메모리에 저장된 파일과 연결되어 있음
+		 * 					해당 메소드 호출 시 연결된 메모리 파일을 디스크(HDD, SDD)로 저장
+		 * 
+		 */
+		
+		// 1) 로그인 회원 번호를 board에 세팅
+		board.setMemberNo(loginMember.getMemberNo());
+		
+		// 2) 웹 접근 경로(webPath), 서버 저장 경로(serverPath)
+		String webPath = "/resources/images/board/"; // (DB에 저장되는 경로)
+		
+		String serverPath = session.getServletContext().getRealPath(webPath);
+		
+		// 3) 게시글 삽입 Service 호출
+		int boardNo = service.insertBoard(board, images, webPath, serverPath);
+		// -> Service 수행 후 삽입된 게시글 번호를 얻어올 예정
+		
+		
+		String path = null;
+		
+		if(boardNo > 0) { // 삽입 성공
+			Util.swalSetMessage("게시글 삽입 성공", null, "success", ra);
+			path = "view/"+boardNo;
+			
+		}else { // 삽입 실패
+			Util.swalSetMessage("게시글 삽입 실패", null, "error", ra);
+			path = "insert";
+		}
+		
+		return "redirect:"+path;
+	} 
 	
 
 }

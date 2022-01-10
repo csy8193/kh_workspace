@@ -55,8 +55,8 @@ function validate(){ // 회원 가입 버튼 클릭 시 유효성 검사여부 �
 
 
     // 우편번호가 작성되어 있을 때에만
+    const input2 = document.createElement("input");
     if(address[0].value.trim().length > 0){
-        const input2 = document.createElement("input");
         input2.setAttribute("type", "hidden");
         input2.setAttribute("name", "memberAddress");
         input2.value = address[0].value + ",," + address[1].value + ",," + address[2].value;

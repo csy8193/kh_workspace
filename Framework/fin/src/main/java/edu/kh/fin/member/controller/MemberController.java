@@ -264,6 +264,8 @@ public class MemberController {
 						// -> 커맨드객체  // redirect 시 데이터 전달
 		// 회원 가입 Service 호출 후 결과 반환 받기
 		
+		System.out.println(member);
+		
 		int result = service.signUp(member);
 		
 		// 메세지 전달용 변수 선언
