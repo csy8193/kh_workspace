@@ -1,6 +1,7 @@
 package edu.kh.fin.board.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -11,6 +12,7 @@ import edu.kh.fin.board.model.vo.Board;
 import edu.kh.fin.board.model.vo.BoardImage;
 import edu.kh.fin.board.model.vo.Category;
 import edu.kh.fin.board.model.vo.Pagination;
+import edu.kh.fin.board.model.vo.Search;
 
 @Repository // 저장소(파일, DB)에 접근하는 객체(DAO)임을 알려줌 + Bean 등록
 public class BoardDAO {
@@ -88,6 +90,73 @@ public class BoardDAO {
 	 */
 	public int insertImgList(List<BoardImage> imgList) {
 		return sqlSession.insert("boardMapper.insertImgList", imgList);
+	}
+
+	/** 게시글 수정
+	 * @param board
+	 * @return result
+	 */
+	public int updateBoard(Board board) {
+		return sqlSession.update("boardMapper.updateBoard", board);
+	}
+
+	/** 게시글 이미지 삭제
+	 * @param map
+	 * @return result
+	 */
+	public int deleteImages(Map<String, Object> map) {
+		return sqlSession.delete("boardMapper.deleteImages", map);
+	}
+
+	/** 게시글 이미지 수정
+	 * @param img
+	 * @return result
+	 */
+	public int updateBoardImage(BoardImage img) {
+		return sqlSession.update("boardMapper.updateBoardImage", img);
+	}
+
+	/** 게시글 이미지 삽입
+	 * @param img
+	 * @return result
+	 */
+	public int insertBoardImage(BoardImage img) {
+		return sqlSession.insert("boardMapper.insertBoardImage", img);
+	}
+
+	/** 게시글 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	public int deleteBoard(int boardNo) {
+		return sqlSession.update("boardMapper.deleteBoard", boardNo);
+	}
+
+	/** 검색 조건에 맞는 전체 게시글 수 count + 페이징 처리에 필요한 값 계산
+	 * @param search
+	 * @return searchListCount
+	 */
+	public int getSearchListCount(Search search) {
+		return sqlSession.selectOne("boardMapper.getSearchListCount", search);
+	}
+
+	public List<Board> selectSearchBoardList(Pagination pagination, Search search) {
+		
+		// 건너 뛸 행의 수 계산
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		// pagination.getLimit() : 건너 뛴 후 조회할 행의 수
+		int limit = pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return sqlSession.selectList("boardMapper.selectSearchBoardList", search, rowBounds);
+	}
+
+	/** 이미지 파일명 목록 조회
+	 * @return dbImgList
+	 */
+	public List<String> selectImgList() {
+		return sqlSession.selectList("boardMapper.selectImgList");
 	}
 	
 }

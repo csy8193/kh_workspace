@@ -17,9 +17,15 @@
 	<!-- mapper에서 사용되는 VO를 간단히 부르기 위한 별칭 지정 -->
 	<typeAliases>
 		<typeAlias type="edu.kh.fin.member.model.vo.Member" alias="Member" />
+		
 		<typeAlias type="edu.kh.fin.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="edu.kh.fin.board.model.vo.BoardImage" alias="BoardImage"/>
 		<typeAlias type="edu.kh.fin.board.model.vo.Category" alias="Category"/>
+		<typeAlias type="edu.kh.fin.board.model.vo.Reply" alias="Reply"/>
+		
+		<typeAlias type="edu.kh.fin.chat.model.vo.ChatMessage" alias="ChatMessage"/>
+		<typeAlias type="edu.kh.fin.chat.model.vo.ChatRoom" alias="ChatRoom"/>
+		<typeAlias type="edu.kh.fin.chat.model.vo.ChatRoomJoin" alias="ChatRoomJoin"/>
 	</typeAliases>
 	
 	
@@ -27,6 +33,8 @@
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml" />
 		<mapper resource="/mappers/board-mapper.xml" />
+		<mapper resource="/mappers/reply-mapper.xml" />
+		<mapper resource="/mappers/chat-mapper.xml" />
 	
 	</mappers>
 
