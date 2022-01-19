@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -12,6 +13,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
+import edu.kh.fin.chat.model.service.ChatService;
 import edu.kh.fin.chat.model.vo.ChatMessage;
 
 // 웹소켓 관련 요청/응답 코드를 작성하는 클래스(bean으로 등록됨)
@@ -54,6 +56,9 @@ public class ChatWebsocketHandler extends TextWebSocketHandler{
 
     */
 	
+	@Autowired
+	private ChatService service;
+	
 	private Set<WebSocketSession> sessions = Collections.synchronizedSet(new HashSet<WebSocketSession>());
 	
 	// synchronizedSet : 동기화된 Set (HashSet은 비동기)
@@ -92,24 +97,31 @@ public class ChatWebsocketHandler extends TextWebSocketHandler{
 		
 		System.out.println("변경된 cm : " + cm);
 		
-		// sessions : 웹소켓 요청을 보낸 모든 클라이언트의 세션 정보가 담겨있음
-		for(WebSocketSession wss : sessions) {
-			
-			// WebSocketSession : 웹소켓서버 - 클라이언트 간의 통신을 가능하게 하는 객체
-			// 					+ HttpSession을 가로채어 가지고 있는 객체
-			
-			// sessions에 저장된 모든 클라이언트 세션 정보에서
-			// chatRoomNo 속성을 얻어오는 구문
-			
-			int chatRoomNo = (Integer)wss.getAttributes().get("chatRoomNo");
-			
-			// 메세지에 있는 방번호와 채팅방에 있으면서(웹소켓 연결 중) 같은 방번호를 가지고있는 클라이언트인 경우
-			if(chatRoomNo == cm.getChatRoomNo()) {
-				wss.sendMessage(new TextMessage(message.getPayload()));
+		// 채팅 내용을 DB에 저장하는 Service 호출
+		int result = service.insertMessage(cm);
+		
+		if(result > 0) {
+			// sessions : 웹소켓 요청을 보낸 모든 클라이언트의 세션 정보가 담겨있음
+			for(WebSocketSession wss : sessions) {
+				
+				// WebSocketSession : 웹소켓서버 - 클라이언트 간의 통신을 가능하게 하는 객체
+				// 					+ HttpSession을 가로채어 가지고 있는 객체
+				
+				// sessions에 저장된 모든 클라이언트 세션 정보에서
+				// chatRoomNo 속성을 얻어오는 구문
+				
+				int chatRoomNo = (Integer)wss.getAttributes().get("chatRoomNo");
+				
+				// 메세지에 있는 방번호와 채팅방에 있으면서(웹소켓 연결 중) 같은 방번호를 가지고있는 클라이언트인 경우
+				if(chatRoomNo == cm.getChatRoomNo()) {
+					wss.sendMessage(new TextMessage(message.getPayload()));
+					
+				}
 				
 			}
 			
 		}
+		
 		
 	}
 	

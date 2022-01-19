@@ -77,7 +77,7 @@ public class ChatController {
 		
 		// 3-1. 채팅방이 존재하면 조회한 채팅 내역과 채팅 번호를 jsp로 forward
 		if(list != null) {
-			model.addAttribute(list);
+			model.addAttribute("list", list);
 			
 			// ******************************************
 			model.addAttribute("chatRoomNo", chatRoomNo);

@@ -25,4 +25,10 @@ public interface ChatService {
 	 */
 	List<ChatMessage> joinChatRoom(ChatRoomJoin join);
 
+	/** 메시지 삽입
+	 * @param cm
+	 * @return result
+	 */
+	int insertMessage(ChatMessage cm);
+
 }

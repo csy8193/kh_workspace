@@ -63,4 +63,12 @@
 		WHERE CHAT_ROOM_NO = #{chatRoomNo}
 		ORDER BY CM_NO
 	</select>
+	
+	<insert id="insertMessage">
+		INSERT INTO CHAT_MESSAGE VALUES(SEQ_CM_NO.NEXTVAL, #{message}, DEFAULT, #{chatRoomNo}, #{memberNo})
+	</insert>
+	
+	<delete id="exitChatRoom">
+		DELETE FROM CHAT_ROOM_JOIN WHERE MEMBER_NO = #{memberNo} AND CHAT_ROOM_NO = #{chatRoomNo}
+	</delete>
 </mapper>
