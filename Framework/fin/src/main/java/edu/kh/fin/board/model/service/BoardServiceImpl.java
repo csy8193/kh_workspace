@@ -89,7 +89,7 @@ public class BoardServiceImpl implements BoardService{
 		board.setBoardContent(Util.changeNewLine(board.getBoardContent()));
 		
 		// 2) board 부분 DB 삽입 DAO 수행 후 삽입된 행의 boardNo 얻어오기
-		// -> Mybatis에서 제공하는 insert 후 PK컬럼 값을 얻어오는 useGeneratedKys, <selectKey> 사용
+		// -> Mybatis에서 제공하는 insert 후 PK컬럼 값을 얻어오는 useGeneratedKeys, <selectKey> 사용
 		int boardNo = dao.insertBoard(board);
 		
 		// System.out.println("삽입된 게시글 번호 : " + boardNo);

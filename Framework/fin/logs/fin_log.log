@@ -40,3 +40,73 @@
 2022-01-18 15:50:18 [INFO] [ip]0:0:0:0:0:0:0:1(id:csy8193) [Controller]ChatController,chatRoomList()
 2022-01-18 15:50:18 [DEBUG] [Service]ChatServiceImpl-chatRoomList()[Running Time]3ms[Param][]
 2022-01-18 15:50:19 [INFO] [ip]0:0:0:0:0:0:0:1(id:csy8193) [Controller]HomeController,mainForward()
+2022-01-19 09:32:36 [INFO] [ip]0:0:0:0:0:0:0:1 [Controller]HomeController,mainForward()
+2022-01-19 09:32:36 [INFO] ------------------------------------------------------------
+
+2022-01-19 09:32:47 [INFO] [ip]0:0:0:0:0:0:0:1 [Controller]MemberController,login5()
+2022-01-19 09:32:48 [DEBUG]  [Service]MemberServiceImpl-login() [Running Time]1077ms [Param][Member [memberNo=0, memberId=user03, memberPw=qwer1234, memberName=null, memberPhone=null, memberEmail=null, memberAddress=null, enrollDate=null, statusCode=0, gradeCode=0]]
+2022-01-19 09:32:48 [INFO] ------------------------------------------------------------
+
+2022-01-19 09:32:48 [INFO] [ip]0:0:0:0:0:0:0:1(id:user03) [Controller]HomeController,mainForward()
+2022-01-19 09:32:48 [INFO] ------------------------------------------------------------
+
+2022-01-19 09:32:54 [INFO] [ip]0:0:0:0:0:0:0:1(id:user03) [Controller]ChatController,chatRoomList()
+2022-01-19 09:32:54 [DEBUG]  [Service]ChatServiceImpl-chatRoomList() [Running Time]6ms [Param][]
+2022-01-19 09:32:54 [INFO] ------------------------------------------------------------
+
+2022-01-19 09:32:57 [INFO] [ip]0:0:0:0:0:0:0:1(id:user03) [Controller]ChatController,joinChatRoom()
+2022-01-19 09:32:57 [DEBUG]  [Service]ChatServiceImpl-joinChatRoom() [Running Time]60ms [Param][ChatRoomJoin [memberNo=41, chatRoomNo=5]]
+2022-01-19 09:32:57 [INFO] ------------------------------------------------------------
+
+2022-01-19 09:33:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]3ms [Param][]
+2022-01-19 09:33:04 [INFO] [ip]0:0:0:0:0:0:0:1(id:user03) [Controller]HomeController,mainForward()
+2022-01-19 09:33:04 [INFO] ------------------------------------------------------------
+
+2022-01-19 09:34:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]2ms [Param][]
+2022-01-19 09:35:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 09:42:17 [INFO] [ip]0:0:0:0:0:0:0:1 [Controller]HomeController,mainForward()
+2022-01-19 09:42:17 [INFO] ------------------------------------------------------------
+
+2022-01-19 09:42:53 [INFO] [ip]0:0:0:0:0:0:0:1 [Controller]ChatController,chatRoomList()
+2022-01-19 09:42:54 [DEBUG]  [Service]ChatServiceImpl-chatRoomList() [Running Time]969ms [Param][]
+2022-01-19 09:42:54 [DEBUG] [Return] [ChatRoom [chatRoomNo=5, title=test2, statusCode=0, memberNo=0, memberName=유저삼, cnt=2], ChatRoom [chatRoomNo=4, title=test, statusCode=0, memberNo=0, memberName=유저삼, cnt=0], ChatRoom [chatRoomNo=2, title=테스트2, statusCode=0, memberNo=0, memberName=유저삼, cnt=3], ChatRoom [chatRoomNo=1, title=테스트1, statusCode=0, memberNo=0, memberName=유저이, cnt=2]]
+2022-01-19 09:42:54 [INFO] ------------------------------------------------------------
+
+2022-01-19 09:43:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 09:43:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:44:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]0ms [Param][]
+2022-01-19 09:44:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:45:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]0ms [Param][]
+2022-01-19 09:45:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:46:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]0ms [Param][]
+2022-01-19 09:46:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:47:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 09:47:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:48:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 09:48:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:49:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]0ms [Param][]
+2022-01-19 09:49:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:50:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]0ms [Param][]
+2022-01-19 09:50:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:51:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]0ms [Param][]
+2022-01-19 09:51:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:52:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 09:52:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:53:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 09:53:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:54:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]0ms [Param][]
+2022-01-19 09:54:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:55:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 09:55:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:56:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 09:56:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:57:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 09:57:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:58:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 09:58:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 09:59:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 09:59:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 10:00:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 10:00:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
+2022-01-19 10:01:00 [DEBUG]  [Service]BoardServiceImpl-selectImgList() [Running Time]1ms [Param][]
+2022-01-19 10:01:00 [DEBUG] [Return] [sample3.jpg, sample4.gif, 20220111090819_88580.jpg, 20220111143903_21019.jpg, 20220111145058_05199.jpg]
